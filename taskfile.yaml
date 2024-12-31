@@ -1,0 +1,23 @@
+####### loggers (c) 2024 Loïc TROCHET ############################################################## MIT License #######
+####### https://taskfile.dev
+
+version: '3'
+
+tasks:
+    lint:
+        cmds:
+            - golangci-lint run
+    test:
+        cmds:
+            - go test -cover -race ./...
+    default:
+        cmds:
+            - task: lint
+            - task: test
+    commit:
+        cmds:
+            - git add .
+            - git commit -m "Under development"
+            - git push
+
+####### END ############################################################################################################
