@@ -84,8 +84,8 @@ func render(w io.Writer, loggers map[string]Logger) error {
 				<td>{{$l.Name}}</td>
 				<td class="level">{{$l.Level}}</td>
 				<td>
-					<a href="?id={{$l.ID}}&cmd=dec" title="Decrement log level">-</a>
-					<a href="?id={{$l.ID}}&cmd=inc" title="Increment log level">+</a>
+					<a href="?id={{$l.ID}}&cmd=less" title="Less log">-</a>
+					<a href="?id={{$l.ID}}&cmd=more" title="More log">+</a>
 				</td>
 			</tr>
 		{{end}}

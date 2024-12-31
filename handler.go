@@ -15,8 +15,8 @@ type (
 		ID() string
 		Name() string
 		Level() string
-		DecLog()
-		IncLog()
+		LessLog()
+		MoreLog()
 	}
 )
 
@@ -30,10 +30,10 @@ func Handler(loggers map[string]Logger) http.Handler {
 					cmd := q.Get("cmd")
 
 					switch cmd {
-					case "dec":
-						l.DecLog()
-					case "inc":
-						l.IncLog()
+					case "less":
+						l.LessLog()
+					case "more":
+						l.MoreLog()
 					}
 				}
 			}
