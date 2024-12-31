@@ -15,23 +15,31 @@ func render(w io.Writer, loggers map[string]Logger) error {
 		`<!DOCTYPE html>
 <html>
 <head>
-	<title>loggers v0.0.0</title>
+	<title>loggers</title>
 	<style>
 		body {
-			background-color: #ffffff;
-			color: #000000;
+			background-color: #314051;
+			color: #32caa9;
 		}
 		a {
 			text-decoration: none;
 			padding: 0 10px;
-			border: 2px solid #ff0000;
+			border: 1px solid #0d8e75;
+			color: #0d8e75;
+		}
+		a:hover {
+			color: #ebf0f1;
+			border: 1px solid #ebf0f1;
 		}
 		h1 {
 			text-align: center;
+			color: #0d8e75;
 		}
 		p {
+			margin: 0;
 			text-align: center;
 			font-size: smaller;
+			color: #475b6e;
 		}
 		table {
 			border-collapse: collapse;
@@ -39,7 +47,7 @@ func render(w io.Writer, loggers map[string]Logger) error {
 			margin-right: auto;
 		}
 		tr {
-			border-bottom: 1px solid #cccccc;
+			border-bottom: 1px solid #475b6e;
 		}
 		td {
 			text-align: left;
@@ -53,7 +61,7 @@ func render(w io.Writer, loggers map[string]Logger) error {
 </head>
 <body>
 {{range $id, $l := .}}
-	<h1>Loggers</h1>
+	<h1>Logger(s)</h1>
 	<table>
 		<thead>
 			<tr>
@@ -69,11 +77,12 @@ func render(w io.Writer, loggers map[string]Logger) error {
 				<td>{{$id}}</td>
 				<td>{{$l.Name}}</td>
 				<td>{{$l.Level}}</td>
-				<td><a href="?id={{$id}}&cmd=dec">-</a></td>
-				<td><a href="?id={{$id}}&cmd=inc">+</a></td>
+				<td><a href="?id={{$id}}&cmd=dec" title="Decrement log level">-</a></td>
+				<td><a href="?id={{$id}}&cmd=inc" title="Increment log level">+</a></td>
 			</tr>
 		</tbody>
 	</table>
+	<p>v0.0.0</p>
 	<p>© 2024 Loïc TROCHET</p>
 {{else}} 
 	<h1>No logger</h1>
