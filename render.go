@@ -26,8 +26,8 @@ func render(w io.Writer, loggers map[string]Logger) error {
 		a {
 			text-decoration: none;
 			padding: 0 10px;
-			border: 1px solid #0d8e75;
-			color: #0d8e75;
+			border: 1px solid #32caa9;
+			color: #32caa9;
 		}
 		a:hover {
 			color: #ebf0f1;
@@ -55,6 +55,9 @@ func render(w io.Writer, loggers map[string]Logger) error {
 			text-align: left;
 			padding: 10px 10px;
 		}
+		td.level {
+			color: #ff7f50;
+		}
 		th {
 			text-align: left;
 			padding: 5px 10px;
@@ -79,7 +82,7 @@ func render(w io.Writer, loggers map[string]Logger) error {
 				<td>{{$n}}</td>
 				<td>{{$l.ID}}</td>
 				<td>{{$l.Name}}</td>
-				<td>{{$l.Level}}</td>
+				<td class="level">{{$l.Level}}</td>
 				<td>
 					<a href="?id={{$l.ID}}&cmd=dec" title="Decrement log level">-</a>
 					<a href="?id={{$l.ID}}&cmd=inc" title="Increment log level">+</a>
