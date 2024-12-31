@@ -63,7 +63,7 @@ func render(w io.Writer, loggers map[string]Logger) error {
 	</table>
 	<p>© 2024 Loïc TROCHET</p>
 {{else}} 
-	<p><strong>no loggers</strong><p>
+	<h1>No logger</h1>
 {{end}}
 </body>
 </html>`,
