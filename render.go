@@ -17,6 +17,15 @@ func render(w io.Writer, loggers map[string]Logger) error {
 <head>
 	<title>loggers v0.0.0</title>
 	<style>
+		body {
+			background-color: #ffffff;
+			color: #000000;
+		}
+		a {
+			text-decoration: none;
+			padding: 0 10px;
+			border: 2px solid #ff0000;
+		}
 		h1 {
 			text-align: center;
 		}
@@ -30,11 +39,15 @@ func render(w io.Writer, loggers map[string]Logger) error {
 			margin-right: auto;
 		}
 		tr {
-			border-bottom: 1px solid #ccc;
+			border-bottom: 1px solid #cccccc;
 		}
-		th, td {
+		td {
 			text-align: left;
-			padding: 5px;
+			padding: 10px 5px;
+		}
+		th {
+			text-align: left;
+			padding: 5px 5px;
 		}
 	</style>
 </head>
@@ -56,8 +69,8 @@ func render(w io.Writer, loggers map[string]Logger) error {
 				<td>{{$id}}</td>
 				<td>{{$l.Name}}</td>
 				<td>{{$l.Level}}</td>
-				<td><a href="?id={{$id}}&cmd=inc">+</a></td>
 				<td><a href="?id={{$id}}&cmd=dec">-</a></td>
+				<td><a href="?id={{$id}}&cmd=inc">+</a></td>
 			</tr>
 		</tbody>
 	</table>
