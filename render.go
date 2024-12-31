@@ -8,6 +8,8 @@ package loggers
 import (
 	"html/template"
 	"io"
+	"slices"
+	"strings"
 )
 
 func render(w io.Writer, loggers map[string]Logger) error {
@@ -51,42 +53,43 @@ func render(w io.Writer, loggers map[string]Logger) error {
 		}
 		td {
 			text-align: left;
-			padding: 10px 5px;
+			padding: 10px 10px;
 		}
 		th {
 			text-align: left;
-			padding: 5px 5px;
+			padding: 5px 10px;
 		}
 	</style>
 </head>
 <body>
-{{range $id, $l := .}}
 	<h1>Logger(s)</h1>
 	<table>
 		<thead>
 			<tr>
+				<th></th>
 				<th>ID</th>
 				<th>Name</th>
 				<th>Level</th>
 				<th></th>
-				<th></th>
 			</tr>
 		</thead>
 		<tbody>
+		{{range $n, $l := .}}
 			<tr>
-				<td>{{$id}}</td>
+				<td>{{$n}}</td>
+				<td>{{$l.ID}}</td>
 				<td>{{$l.Name}}</td>
 				<td>{{$l.Level}}</td>
-				<td><a href="?id={{$id}}&cmd=dec" title="Decrement log level">-</a></td>
-				<td><a href="?id={{$id}}&cmd=inc" title="Increment log level">+</a></td>
+				<td>
+					<a href="?id={{$l.ID}}&cmd=dec" title="Decrement log level">-</a>
+					<a href="?id={{$l.ID}}&cmd=inc" title="Increment log level">+</a>
+				</td>
 			</tr>
+		{{end}}
 		</tbody>
 	</table>
 	<p>v0.0.0</p>
 	<p>© 2024 Loïc TROCHET</p>
-{{else}} 
-	<h1>No logger</h1>
-{{end}}
 </body>
 </html>`,
 	)
@@ -94,7 +97,20 @@ func render(w io.Writer, loggers map[string]Logger) error {
 		return err
 	}
 
-	return t.Execute(w, loggers)
+	list := make([]Logger, 0, len(loggers))
+
+	for _, l := range loggers {
+		list = append(list, l)
+	}
+
+	slices.SortFunc(
+		list,
+		func(a, b Logger) int {
+			return strings.Compare(a.Name(), b.Name())
+		},
+	)
+
+	return t.Execute(w, list)
 }
 
 /*

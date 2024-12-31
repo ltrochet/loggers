@@ -12,6 +12,7 @@ import (
 
 type (
 	Logger interface {
+		ID() string
 		Name() string
 		Level() string
 		DecLog()
